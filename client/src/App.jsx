@@ -4,8 +4,10 @@ import About from "./pages/About"
 import Games from "./pages/Games"
 import Dashboard from "./pages/Dashboard"
 import SignUp from "./pages/SignUp"
-import LogIn from "./pages/LogIn"
+import SignIn from "./pages/SignIn"
 import Header from "./components/Header"
+import FooterCom from "./components/FooterCom"
+import PrivateRoute from './components/PrivateRoute'
 
 function App() {
   
@@ -14,12 +16,15 @@ function App() {
     <Header />
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/sign-in" element={<LogIn />}/> 
+      <Route path="/sign-in" element={<SignIn />}/> 
       <Route path="/sign-up" element={<SignUp />}/>
       <Route path="/about" element={<About />} />
       <Route path="/all-games" element={<Games />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route element={<PrivateRoute />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Route>
     </Routes>
+    <FooterCom/>
     </BrowserRouter>
   )
 }
