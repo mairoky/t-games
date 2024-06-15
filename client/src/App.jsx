@@ -11,11 +11,16 @@ import PrivateRoute from './components/PrivateRoute'
 import OnlyAdminPrivateRoute from "./components/OnlyAdminPrivateRoute"
 import AddGame from "./pages/AddGame"
 import UpdateGame from "./pages/UpdateGame"
+import GamePage from "./pages/GamePage"
+import ScrollToTop from './components/ScrollToTop'
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   
   return (
     <BrowserRouter>
+    <ScrollToTop />
+    <Toaster />
     <Header />
     <Routes>
       <Route path="/" element={<Home />} />
@@ -23,6 +28,7 @@ function App() {
       <Route path="/sign-up" element={<SignUp />}/>
       <Route path="/about" element={<About />} />
       <Route path="/all-games" element={<Games />} />
+      <Route path="/game/:gameSlug" element={<GamePage />} />
       <Route element={<PrivateRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
       </Route>

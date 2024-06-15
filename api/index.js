@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
 import gameRoutes from './routes/game.route.js';
+import reviewRoutes from './routes/review.route.js';
 import cookieParser from 'cookie-parser';
 
 dotenv.config();
@@ -28,6 +29,7 @@ app.listen(5000, () => {
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/game', gameRoutes);
+app.use('/api/review', reviewRoutes);
 
 
 app.use((err, req, res, next) => {

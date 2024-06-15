@@ -35,7 +35,7 @@ export const getgames = async (req, res, next) => {
       const games = await Game.find({
         ...(req.query.userId && { userId: req.query.userId }),
         ...(req.query.category && { category: req.query.category }),
-        ...(req.query.slug && { category: req.query.slug }),
+        ...(req.query.slug && { slug: req.query.slug }),
         ...(req.query.gameId && { _id: req.query.gameId }),
         ...(req.query.searchTerm && {
           $or: [
