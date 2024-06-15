@@ -8,6 +8,9 @@ import SignIn from "./pages/SignIn"
 import Header from "./components/Header"
 import FooterCom from "./components/FooterCom"
 import PrivateRoute from './components/PrivateRoute'
+import OnlyAdminPrivateRoute from "./components/OnlyAdminPrivateRoute"
+import AddGame from "./pages/AddGame"
+import UpdateGame from "./pages/UpdateGame"
 
 function App() {
   
@@ -22,6 +25,10 @@ function App() {
       <Route path="/all-games" element={<Games />} />
       <Route element={<PrivateRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
+      </Route>
+      <Route element={<OnlyAdminPrivateRoute />}>
+        <Route path="/add-game" element={<AddGame />} />
+        <Route path='/update-game/:gameId' element={<UpdateGame />} />
       </Route>
     </Routes>
     <FooterCom/>
