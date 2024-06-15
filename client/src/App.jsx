@@ -14,6 +14,7 @@ import UpdateGame from "./pages/UpdateGame"
 import GamePage from "./pages/GamePage"
 import ScrollToTop from './components/ScrollToTop'
 import { Toaster } from 'react-hot-toast';
+import Search from "./pages/Search"
 
 function App() {
   
@@ -28,6 +29,7 @@ function App() {
       <Route path="/sign-up" element={<SignUp />}/>
       <Route path="/about" element={<About />} />
       <Route path="/all-games" element={<Games />} />
+      <Route path='/search' element={<Search />} />
       <Route path="/game/:gameSlug" element={<GamePage />} />
       <Route element={<PrivateRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />

@@ -1,104 +1,9 @@
-// import { Alert, Button, TextInput, Textarea } from 'flowbite-react';
-// import { set } from 'mongoose';
-// import { useState } from 'react';
-// import { useSelector } from 'react-redux';
-// import { Link } from 'react-router-dom';
-
-// const ReviewSection = ({gameId}) => {
-//     const { currentUser } = useSelector((state) => state.user);
-//   const [review, setReview] = useState('');
-//   const [reviewError, setReviewError] = useState(null);
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     if (review.length > 200) {
-//       return;
-//     }
-//     try {
-//       const res = await fetch('/api/review/create', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//           content: review,
-//           gameId,
-//           userId: currentUser._id,
-//         }),
-//       });
-//       const data = await res.json();
-//       if (res.ok) {
-//         setReview('');
-//         setReviewError(null);
-//       }
-//     } catch (error) {
-//       setReviewError(error.message);
-//     }
-//   };
-
-//   return (
-//     <div className='max-w-2xl mx-auto w-full p-3'>
-//       {currentUser ? (
-//         <div className='flex items-center gap-1 my-5 text-gray-500 text-sm'>
-//           <p>Signed in as:</p>
-//           <img
-//             className='h-5 w-5 object-cover rounded-full'
-//             src={currentUser.profilePicture}
-//             alt=''
-//           />
-//           <Link
-//             to={'/dashboard?tab=profile'}
-//             className='text-xs text-cyan-600 hover:underline'
-//           >
-//             @{currentUser.username}
-//           </Link>
-//         </div>
-//       ) : (
-//         <div className='text-sm text-teal-500 my-5 flex gap-1'>
-//           You must be signed in to review.
-//           <Link className='text-blue-500 hover:underline' to={'/sign-in'}>
-//             Sign In
-//           </Link>
-//         </div>
-//       )}
-//       {currentUser && (
-//         <form
-//           onSubmit={handleSubmit}
-//           className='border border-teal-500 rounded-md p-3'
-//         >
-//           <Textarea
-//             placeholder='Add a comment...'
-//             rows='3'
-//             maxLength='200'
-//             onChange={(e) => setReview(e.target.value)}
-//             value={review}
-//           />
-//           <div className='flex justify-between items-center mt-5'>
-//             <p className='text-gray-500 text-xs'>
-//               {200 - review.length} characters remaining
-//             </p>
-//             <Button outline gradientDuoTone='purpleToBlue' type='submit'>
-//               Submit
-//             </Button>
-//           </div>
-//           {reviewError && (
-//             <Alert color='failure' className='mt-5'>
-//               {reviewError}
-//             </Alert>
-//           )}
-//         </form>
-//       )}
-//     </div>
-//   )
-// }
-
-// export default ReviewSection
 
 import { Alert, Button, Textarea, Modal } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import ReactStars from 'react-stars';
 import Review from './Review';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
@@ -113,6 +18,7 @@ const ReviewSection = ({ gameId }) => {
 const [showModal, setShowModal] = useState(false);
 const [reviewToDelete, setReviewToDelete] = useState(null);
 const navigate = useNavigate();
+const location = useLocation();
 
   const getLocation = () => {
     return new Promise((resolve, reject) => {
@@ -127,7 +33,7 @@ const navigate = useNavigate();
     }
     try {
       const location = await getLocation();
-      console.log(location);
+      // console.log(location);
       const res = await fetch('/api/review/create', {
         method: 'POST',
         headers: {
@@ -223,6 +129,7 @@ const navigate = useNavigate();
       });
       if (res.ok) {
         const data = await res.json();
+        console.log(data);
         setReviews(reviews.filter((review) => review._id !== reviewId));
       }
     } catch (error) {
@@ -250,7 +157,7 @@ const navigate = useNavigate();
       ) : (
         <div className='text-sm text-teal-500 my-5 flex gap-1'>
           You must be signed in to review.
-          <Link className='text-blue-500 hover:underline' to={'/sign-in'}>
+          <Link className='text-blue-500 hover:underline' to='/sign-in'>
             Sign In
           </Link>
         </div>

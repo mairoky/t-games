@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import {store, persistor} from './redux/store.js'
 import ThemeProvider from './components/ThemeProvider.jsx';
 import App from './App.jsx'
+import 'leaflet/dist/leaflet.css';
 import './index.css'
 
 

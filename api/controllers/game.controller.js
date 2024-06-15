@@ -1,4 +1,5 @@
 import Game from '../models/game.model.js';
+import { calculateAverageRating } from '../utils/calculateAverageRating.js';
 import { errorHandler } from '../utils/error.js';
 
 export const create = async (req, res, next) => {
@@ -61,9 +62,17 @@ export const getgames = async (req, res, next) => {
       const lastMonthGames = await Game.countDocuments({
         createdAt: { $gte: oneMonthAgo },
       });
+
+      // Calculate average ratings for each game
+    const gamesWithRatings = await Promise.all(
+      games.map(async (game) => {
+        const averageRating = await calculateAverageRating(game._id);
+        return { ...game.toObject(), averageRating };
+      })
+    );
   
       res.status(200).json({
-        games,
+        games: gamesWithRatings,
         totalGames,
         lastMonthGames,
       });
@@ -79,7 +88,7 @@ export const deletegame = async (req, res, next) => {
     }
     try {
       await Game.findByIdAndDelete(req.params.gameId);
-      res.status(200).json('The post has been deleted');
+      res.status(200).json('The game has been deleted');
     } catch (error) {
       next(error);
     }
