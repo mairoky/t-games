@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "MobileApp",
+    "slug": "MobileApp",
+    "version": "1.0.0",
+    "scheme": "your-app-scheme",
+    "android": {
+      "package": "com.aminul.tgamesreview"
+    },
+    "web": {
+    "bundler": "metro"
+  }
+  }
+}
