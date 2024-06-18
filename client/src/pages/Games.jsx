@@ -65,7 +65,7 @@ const Games = () => {
         <p className='text-xl text-gray-500'>No games found.</p>
       )}
       {loading && <p className='text-xl text-gray-500'>Loading...</p>}
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+      <div className='grid grid-cols-1 md:grid-cols-2  gap-4'>
           {!loading &&
             games &&
             games.map((game) => <GameCard key={game._id} game={game} />
